@@ -9,13 +9,13 @@
 
 ## Community
 [<img src=".github/assets/discord.png" alt="Discord" width="150" align="left">](https://discord.gg/twywyWD8Uc)
-[Discord] (https://discord.gg/twywyWD8Uc) is the place where most of the discussion happens, due to absence of a forum. Here you can contact administrators, ask mentors for help, or simply discuss your rounds. It is also a place where you can find links to ban appeals, admin applications and others, which could be really useful.
+[[Discord](https://discord.gg/twywyWD8Uc)] is the place where most of the discussion happens, due to absence of a forum. Here you can contact administrators, ask mentors for help, or simply discuss your rounds. It is also a place where you can find links to ban appeals, admin applications and others, which could be really useful.
 
 This server is based on the game **Lobotomy Corporation** created by **Project Moon**.
 We highly recommend that you try it for yourself!
 
-**Steam Page:** [https://store.steampowered.com/app/568220/Lobotomy_Corporation__Monster_Management_Simulation] (Lobotomy Corporation: Monster Management Simulation)
-**Trailers:** [First] (https://www.youtube.com/watch?v=VmHORmTGmm0), [Second] (https://www.youtube.com/watch?v=WbN40vpse0k)
+**Steam Page:** [[Lobotomy Corporation: Monster Management Simulation](https://store.steampowered.com/app/568220/Lobotomy_Corporation__Monster_Management_Simulation)]
+**Trailers:** [[First](https://www.youtube.com/watch?v=VmHORmTGmm0)], [[Second](https://www.youtube.com/watch?v=WbN40vpse0k)]
 
 ## Information
 * **Code:** https://github.com/Lobotomy-Corporation-13/lc13
@@ -25,8 +25,6 @@ We highly recommend that you try it for yourself!
 [Downloading](.github/DOWNLOADING.md)
 
 [Running on the server](.github/RUNNING_A_SERVER.md)
-
-[Maps and Away Missions](.github/MAPS_AND_AWAY_MISSIONS.md)
 
 ## Contributing
 [Guidelines for Contributors](.github/CONTRIBUTING.md)
