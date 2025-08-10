@@ -1,5 +1,7 @@
 #define STATUS_EFFECT_STARCULTIST /datum/status_effect/starcultist
 
+// make the Pebbles self-update when the cult changes.
+
 /mob/living/simple_animal/hostile/abnormality/star_luminary
 	name = "Star Luminary"
 	desc = "An abnormality resembling a headless gaunt humanoid, floating in the air. Each of it's six arms holds in their hands a single blue marble of considerable size."
@@ -249,6 +251,7 @@
 	. = ..()
 	var/mob/living/carbon/human/status_holder = owner
 	UnregisterSignal(status_holder, COMSIG_LIVING_DEATH)
+	UnregisterSignal(status_holder, COMSIG_HUMAN_INSANE)
 	if(LAZYFIND(luminary.cult, status_holder))
 		LAZYREMOVE(luminary.cult, status_holder)
 
