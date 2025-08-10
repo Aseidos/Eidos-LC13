@@ -56,9 +56,9 @@
 
 
 	var/pulse_cooldown
-	var/pulse_cooldown_time = 12 SECONDS
+	var/pulse_cooldown_time = 20 SECONDS
 	var/pulse_damage = 100 // Scales with distance.
-	var/cult_damage_scaling = 15
+	var/cult_damage_scaling = 10
 	var/first_pulse_damage = 50
 	var/cult_workchance_boost = 30
 
