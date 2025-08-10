@@ -261,7 +261,7 @@
 		"When the Qliphoth Counter hit zero, the Abnormality appeared in one of the department centers and began emitting damaging pulses. The abnormality grew stronger with the amount of enthralled employees, and enthralled employees experienced a much more pronounced increase in mental corruption from these pulses compared to non-enthralled employees.",
 		"To suppress the abnormality, employees had to find one or more blue marbles scattered through the facility and deliver them to the abnormality, afterwards the abnormality recontained itself willingly.",
 		"WARNING: Enthralled employees are essential for the recovery of the marbles, as the items will generally refuse to move without the presence of enthralled employees. The blue marbles protected enthralled employees from the pulses, but inflicted severe mental corruption on their own continously. This corrupting effect seemed to be greatly diminished with an increased amount of enthralled employees present near the marble.",
-		"WARNING: The blue marbles inflict extreme mental corruption to enthralled employees upon contact, it is recommended that mixed teams of enthralled and non-enthralled employees are formed to suppress the abnormality."
+		"WARNING: The blue marbles inflict extreme mental corruption to enthralled employees upon contact, it is recommended that mixed teams of enthralled and non-enthralled employees are formed to suppress the abnormality.",
 		"DANGER: Do not linger around mentally unstable employees who have been enthralled by the abnormality.")
 	abno_breach_damage_type = "Black/White"
 	abno_breach_damage_count = "High to Extreme" // A high cultist amount breach can reach upwards to 200+ damage per pulse.
