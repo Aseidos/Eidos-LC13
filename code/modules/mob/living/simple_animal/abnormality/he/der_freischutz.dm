@@ -393,7 +393,7 @@
 	if(T)
 		forceMove(T)
 
-/mob/living/simple_animal/hostile/abnormality/der_freischutz/proc/PortalAssault(var/mob/living/TargetOverride = null, extended = TRUE)
+/mob/living/simple_animal/hostile/abnormality/der_freischutz/proc/PortalAssault(mob/living/TargetOverride = null, extended = TRUE)
 	var/mob/living/bullet_target
 	if(TargetOverride)
 		bullet_target = TargetOverride
