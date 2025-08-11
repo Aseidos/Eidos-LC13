@@ -19,7 +19,7 @@
 	aggro_vision_range = 40
 	del_on_death = FALSE
 	threat_level = HE_LEVEL
-	start_qliphoth = 3
+	start_qliphoth = 5
 	work_chances = list(
 		ABNORMALITY_WORK_INSTINCT = 40,
 		ABNORMALITY_WORK_INSIGHT = 50,
@@ -320,16 +320,24 @@
 
 /mob/living/simple_animal/hostile/abnormality/der_freischutz/PostWorkEffect(mob/living/carbon/human/user, work_type, pe, work_time)
 	if(get_attribute_level(user, JUSTICE_ATTRIBUTE) < 60)
-		datum_reference.qliphoth_change(-1)
+		HandleQli(-1)
 	return
 
 /mob/living/simple_animal/hostile/abnormality/der_freischutz/FailureEffect(mob/living/carbon/human/user, work_type, pe)
-	datum_reference.qliphoth_change(-1)
+	HandleQli(-2)
 	return ..()
 
 /mob/living/simple_animal/hostile/abnormality/der_freischutz/NeutralEffect(mob/living/carbon/human/user, work_type, pe)
-	datum_reference.qliphoth_change(-(prob(75)))
+	if(prob(75))
+		HandleQli(-1)
 	return ..()
+
+/mob/living/simple_animal/hostile/abnormality/der_freischutz/proc/HandleQli(amount)
+	datum_reference.qliphoth_change(amount)
+	if(amount < 0)
+		for(var/i = 1 to -(amount))
+			ContainedFireBullet()
+			SLEEP_CHECK_DEATH(2 SECONDS)
 
 /mob/living/simple_animal/hostile/abnormality/der_freischutz/BreachEffect(mob/living/carbon/human/user, breach_type)
 	. = ..()
