@@ -64,7 +64,6 @@
 	var/portal_cooldown_time = 5 SECONDS
 	var/portal_assault_firerate = 2 SECONDS // 2 seconds between each shot of the portal assault.
 	var/portal_assault_timer = 0
-	var/list/debug
 
 	//PLAYABLES ATTACKS (action in this case)
 	attack_action_types = list(/datum/action/innate/abnormality_attack/toggle/der_freischutz_zoom,
@@ -376,18 +375,13 @@
 	var/list/possible_departments = GLOB.department_centers
 	var/list/living_agents = AllLivingAgents(TRUE)
 	var/turf/T
-	debug += possible_departments
 	if(LAZYLEN(possible_departments))
 		for(var/turf/check in possible_departments)
 			if(LAZYLEN((range(5, check))&(living_agents)))
 				LAZYREMOVE(possible_departments, check)
-		debug += possible_departments
-		debug += GLOB.department_centers
 		if(LAZYLEN(possible_departments))
-			debug += "could find"
 			T = pick(possible_departments)
 		else
-			debug += "couldnt find"
 			T = pick(GLOB.department_centers)
 	can_move = FALSE
 	if(T)
