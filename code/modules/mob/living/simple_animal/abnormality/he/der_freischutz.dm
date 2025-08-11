@@ -332,11 +332,11 @@
 	return ..()
 
 /mob/living/simple_animal/hostile/abnormality/der_freischutz/proc/HandleQli(amount)
-	datum_reference.qliphoth_change(amount)
 	if(amount < 0)
 		for(var/i = 1 to -(amount))
 			ContainedFireBullet()
 			SLEEP_CHECK_DEATH(2 SECONDS)
+	datum_reference.qliphoth_change(amount)
 
 /mob/living/simple_animal/hostile/abnormality/der_freischutz/BreachEffect(mob/living/carbon/human/user, breach_type)
 	. = ..()
