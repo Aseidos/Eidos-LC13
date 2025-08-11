@@ -372,7 +372,7 @@
 		animate(src, alpha = 255, time = 0.5 SECONDS)
 
 /mob/living/simple_animal/hostile/abnormality/der_freischutz/proc/TeleportDepartmentCenter()
-	var/list/possible_departments = GLOB.department_centers
+	var/list/possible_departments = GLOB.department_centers.Copy()
 	var/list/living_agents = AllLivingAgents(TRUE)
 	var/turf/T
 	if(LAZYLEN(possible_departments))
