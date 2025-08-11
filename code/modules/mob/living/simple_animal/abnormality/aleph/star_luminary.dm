@@ -245,7 +245,7 @@
 		StartInsanity()
 		return
 	RegisterSignal(status_holder, COMSIG_HUMAN_INSANE, PROC_REF(StartInsanity))
-	to_chat(status_holder, span_danger("I see....the truth was there all along."))
+	to_chat(status_holder, span_danger("You suddenly understand the truth of the Stars. Their beauty is mesmerizing..."))
 
 /datum/status_effect/starcultist/on_remove()
 	. = ..()
@@ -254,6 +254,7 @@
 	UnregisterSignal(status_holder, COMSIG_HUMAN_INSANE)
 	if(LAZYFIND(luminary.cult, status_holder))
 		LAZYREMOVE(luminary.cult, status_holder)
+	to_chat(status_holder, span_warning("The truths bestowed by the Stars start to slip away from your mind, until all that remains are hazy memories and a splitting headache."))
 
 /datum/status_effect/starcultist/tick()
 	. = ..()
