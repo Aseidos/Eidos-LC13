@@ -196,7 +196,7 @@
 		to_chat(cultist, span_userdanger("Sorrow and pain washes over you, a fellow follower of the Star has perished..."))
 
 /mob/living/simple_animal/hostile/abnormality/star_luminary/BreachEffect(mob/living/carbon/human/user, breach_type)
-	var/list/pebblespawns = GLOB.xeno_spawn
+	var/list/pebblespawns = GLOB.xeno_spawn.Copy()
 	for(var/i = 1 to max((floor(LAZYLEN(cult)/2)), 1))
 		var/pebble
 		var/turf/W = pick(pebblespawns)
