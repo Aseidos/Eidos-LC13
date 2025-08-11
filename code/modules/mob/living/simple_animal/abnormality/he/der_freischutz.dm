@@ -340,7 +340,7 @@
 
 /mob/living/simple_animal/hostile/abnormality/der_freischutz/BreachEffect(mob/living/carbon/human/user, breach_type)
 	. = ..()
-	var/portal_spawns = GLOB.xeno_spawn
+	var/portal_spawns = GLOB.xeno_spawn.Copy()
 	if(!LAZYLEN(portal_spawns))
 		Machine_Gun()
 		datum_reference.qliphoth_change(start_qliphoth)
