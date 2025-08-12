@@ -53,7 +53,7 @@
 	var/bullet_cooldown
 	var/bullet_cooldown_time = 7 SECONDS
 	var/bullet_fire_delay = 1.5 SECONDS
-	var/bullet_max_range = 100
+	var/bullet_max_range = 200
 	var/bullet_damage = 80
 	var/breach_portals_amount = 7
 	var/list/portals = list()
