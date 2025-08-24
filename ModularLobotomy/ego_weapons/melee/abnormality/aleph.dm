@@ -1608,7 +1608,7 @@
 	name = "starbound faith"
 	desc = "The blue marble is desperately clasped between two blackened hands. \
 	Hope, Faith, Zealotry. The Stars illuminate the path to salvation, and countless hands reach forward to grasp it."
-	icon_state = "galaxy"
+	icon_state = "faith"
 	inhand_icon_state = "galaxy"
 	force = 85
 	swingstyle = WEAPONSWING_LARGESWEEP

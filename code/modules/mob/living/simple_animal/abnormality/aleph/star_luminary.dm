@@ -9,7 +9,7 @@
 	desc = "An abnormality resembling a headless gaunt humanoid, floating in the air. Each of it's six arms holds in their hands a single blue marble of considerable size."
 	health = 4000
 	maxHealth = 4000
-	icon = 'ModularTegustation/Teguicons/128x128.dmi'
+	icon = 'ModularLobotomy/_Lobotomyicons/128x128.dmi'
 	pixel_x = -48
 	base_pixel_x = -48
 	pixel_y = -10
@@ -240,7 +240,7 @@
 /atom/movable/screen/alert/status_effect/starcultist
 	name = "Star-struck"
 	desc = "Your eyes have been opened to the truth that exists in the skies above."
-	icon = 'ModularTegustation/Teguicons/status_sprites.dmi'
+	icon = 'ModularLobotomy/_Lobotomyicons/status_sprites.dmi'
 	icon_state = "star_cultist"
 
 /datum/status_effect/starcultist/on_creation(mob/living/new_owner, parent, luminaryqli)
@@ -363,7 +363,7 @@
 /obj/structure/starbound_pebble
 	name = "blue marble"
 	desc = "A round blue marble, it's pretty big and shiny but otherwise uninteresting."
-	icon = 'ModularTegustation/Teguicons/32x32.dmi'
+	icon = 'ModularLobotomy/_Lobotomyicons/32x32.dmi'
 	icon_state = "blue_marble"
 	anchored = FALSE
 	move_resist = MOVE_RESIST_DEFAULT
@@ -376,7 +376,7 @@
 	// Custom Appearance for Luminary Cultists
 	var/cult_name = "gestating star"
 	var/cult_desc = "We were born into an abyss of despair, but with the guidance of The Star we shall float towards a new beginning."
-	var/cult_icon = 'ModularTegustation/Teguicons/32x32.dmi'
+	var/cult_icon = 'ModularLobotomy/_Lobotomyicons/32x32.dmi'
 	var/cult_image_state = "cult_blue_marble"
 	///Tracked image
 	var/image/cult_img
