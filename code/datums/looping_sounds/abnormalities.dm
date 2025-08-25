@@ -137,6 +137,15 @@
 	extra_range = 40
 	channel = CHANNEL_MFE
 
+/datum/looping_sound/memorial_raid_alarm
+	mid_sounds = 'sound/misc/airraid.ogg'
+	mid_length = 6 SECONDS
+	volume = 65
+	extra_range = 40
+	falloff_distance = 35 //minimal falloff due to being a long sound
+	end_sound = 'sound/abnormalities/siren/needle2.ogg'
+	channel = CHANNEL_MEMORIAL
+
 // Ordeals
 /datum/looping_sound/amberdusk
 	mid_sounds = 'sound/effects/ordeals/amber/dusk_ambience.ogg'
