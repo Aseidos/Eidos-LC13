@@ -177,6 +177,133 @@ Turf and target are separate in case you want to teleport some distance from a t
 			line+=locate(px,py,M.z)
 	return line
 
+/proc/coolergetline(atom/origin, atom/destination, range_offset, include_origin_turf)
+	var/px = origin.x		// starting x
+	var/py = origin.y		// starting y
+	var/dx = destination.x - px	// origin -> destination x distance
+	var/dy = destination.y - py // origin -> destination y distance
+	var/sdx = sign(dx)
+	var/sdy = sign(dy)
+	var/dxabs = abs(dx)
+	var/dyabs = abs(dy)
+	var/list/line = include_origin_turf? list(get_turf(origin)) : list() // If include_origin_turf null or FALSE, do not include the origin turf in the list to-return.
+
+	if(dxabs >= dyabs)	// x distance is greater than y
+		var/D = (2 * dyabs) - dxabs
+		for(var/j in 1 to dxabs + range_offset)	// It'll take abs(dx) + range_offset steps to get there
+			px += sdx		// Step on in x direction
+			if(D > 0)
+				py += sdy	// Step on in y direction
+				D -= (2 * dxabs)
+			D += (2 * dyabs)
+			line += locate(px, py, origin.z) // Add the turf to the list
+	else				// y distance is greater than x
+		var/D = (2 * dxabs) - dyabs
+		for(var/j in 1 to (dyabs + range_offset))	// It'll take abs(dy) + range_offset steps to get there
+			py += sdy		// Step on in y direction
+			if(D > 0)
+				px += sdx	// Step on in x direction
+				D -= (2 * dyabs)
+			D += (2 * dxabs)
+			line += locate(px, py, origin.z) // Add the turf to the list
+	return line
+
+/proc/coolerandthickgetline(atom/origin, atom/destination, range_offset, extra_thickness, include_origin_turf, detailed_return) // Hmmm, thick.
+	if(!extra_thickness)
+		CRASH("Called coolerandthickgetline() without the thickness argument. Just use coolergetline()")
+	var/px = origin.x 			// starting x
+	var/py = origin.y			// starting y
+	var/dx = destination.x - px	// origin -> destination x distance
+	var/dy = destination.y - py // origin -> destination y distance
+	var/sdx = sign(dx)
+	var/sdy = sign(dy)
+	var/dxabs = abs(dx)
+	var/dyabs = abs(dy)
+	var/list/thickline = list()
+	var/detailed_thick_line
+
+	//	Okay, to explain this very shortly: If detailed_return is TRUE, this proc will return a list of lists instead of a singular list.
+	//	Each element being one of the individual lines that together compose the thick line. Which index holds which line can be found below.
+	if(detailed_return)
+		detailed_thick_line = new/list((2 * extra_thickness) + 1) // Pre-allocating list slots because we are swagger like that.
+		. = detailed_thick_line
+	else
+		. = thickline
+
+	// x distance is greater than y
+	if(dxabs >= dyabs)
+		for(var/the_thickler in (-extra_thickness) to (extra_thickness)) // Not to be confused with either the tick-ler or the tickle-er
+			if(include_origin_turf && !the_thickler) // When counter = 0, we are in the "normal" line.
+				thickline += get_turf(origin)
+			py = origin.y + the_thickler		// The y origin is moved to create a series of parallel lines that form the thick line.
+			px = origin.x
+			var/D = (2 * dyabs) - dxabs
+			for(var/j in 1 to (dxabs + range_offset))	// It'll take abs(dx) + range_offset steps to get there
+				px += sdx		// Step on in x direction
+				if(D > 0)
+					py += sdy	// Step on in y direction
+					D -= (2 * dxabs)
+					// thickline += locate(px, py, origin.z) // Do not jump through diagonals dummy.
+				D += (2 * dyabs)
+				thickline += locate(px, py, origin.z) // Add the turf to the list
+			if(detailed_return)
+				detailed_thick_line[1 + (the_thickler + extra_thickness)] = thickline.Copy() // The lowest line is index 1, the highest line is index (1 + (2 * extra_thickness)), central line is index (1 + extra_thickness)
+				thickline.Cut()
+	// y distance is greater than x
+	else
+		for(var/the_thickler in (-extra_thickness) to extra_thickness)
+			if(include_origin_turf && !the_thickler) // When counter = 0, we are in the original line.
+				thickline += get_turf(origin)
+			var/D = (2 * dxabs) - dyabs
+			px = origin.x + the_thickler		// The x origin is moved to create a series of parallel lines that form the thick line.
+			py = origin.y
+			for(var/j in 1 to (dyabs + range_offset))	// It'll take abs(dy) + range_offset steps to get there
+				py += sdy		// Step on in y direction
+				if(D > 0)
+					px += sdx	// Step on in x direction
+					D -= (2 * dyabs)
+					// thickline += locate(px, py, origin.z)
+				D += (2 * dxabs)
+				thickline += locate(px, py, origin.z)
+			if(detailed_return)
+				detailed_thick_line[1 + (the_thickler + extra_thickness)] = thickline.Copy() // The leftmost line is index 1, the rightmost line is index (1 + (2 * extra_thickness)), central line is index (1 + extra_thickness)
+				thickline.Cut()
+	return .
+
+/proc/get_line_with_collision(atom/here, atom/there, range_offset, collision_flags)
+	. = list()
+	var/turf/here_turf = get_turf(here)
+	var/atom/movable/collision_dummy/dummy = new(here_turf, collision_flags)
+	for(var/turf/T as anything in (coolergetline(here_turf, get_turf(there), range_offset)))
+		if(!dummy.Move(T)) //we're blocked!
+			break
+		. += T
+	qdel(dummy)
+	return .
+
+/proc/get_thick_line_with_collision(atom/here, atom/there, range_offset, extra_thickness, collision_flags)
+	. = list()
+	var/turf/here_turf = get_turf(here)
+	var/atom/movable/collision_dummy/dummy = new(here_turf, collision_flags)
+	var/thicklinetocheck = (coolerandthickgetline(here_turf, get_turf(there), range_offset, extra_thickness, FALSE, TRUE)) // We need a detailed return of the list categorized by each stroke to be able to calculate collision.
+	for(var/list/individual_lines in thicklinetocheck)
+		dummy.forceMove(here_turf) // I am torn here between forcemoving or modifying loc directly. I suppose I will go for the safest option.
+		for(var/turf/turfs_to_check in individual_lines)
+			if(!dummy.Move(turfs_to_check)) //we're blocked!
+				break
+			. += turfs_to_check
+	qdel(dummy)
+	return .
+
+/atom/movable/collision_dummy
+	pass_flags = (PASSTABLE | PASSMOB)
+	invisibility = INVISIBILITY_ABSTRACT
+
+/atom/movable/collision_dummy/Initialize(mapload, flag_override)
+	. = ..()
+	if(flag_override)
+		pass_flags = flag_override
+
 //Returns whether or not a player is a guest using their ckey as an input
 /proc/IsGuestKey(key)
 	if (findtext(key, "Guest-", 1, 7) != 1) //was findtextEx

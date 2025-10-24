@@ -112,7 +112,7 @@ GLOBAL_LIST_EMPTY(marked_players)
 	old_rapid_melee = rapid_melee
 	if(!targets_from)
 		targets_from = src
-	target_switch_resistance = sqrt(maxHealth) * 2.5 //increases with maxHealth but not too much
+	target_switch_resistance += sqrt(maxHealth) * 2.5 //increases with maxHealth but not too much
 
 	wanted_objects = typecacheof(wanted_objects)
 
